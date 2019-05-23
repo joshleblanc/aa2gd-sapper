@@ -25,8 +25,22 @@ module.exports = {
 							hotReload: false // pending https://github.com/sveltejs/svelte/issues/2377
 						}
 					}
-				}
+				},
+				{
+			        test: /\.css$/,
+			        use: ['style-loader', 'css-loader'],
+			    },
+			    {
+			        test: /\.(png|jpe?g|gif)$/,
+			        use: [
+			          {
+			            loader: 'file-loader',
+			            options: {},
+			          },
+			        ],
+			      },
 			]
+				
 		},
 		mode,
 		plugins: [

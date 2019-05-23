@@ -1,77 +1,19 @@
-<style>
-	h1, figure, p {
-		text-align: center;
-		margin: 0 auto;
-	}
-
-	h1 {
-		font-size: 2.8em;
-		text-transform: uppercase;
-		font-weight: 700;
-		margin: 0 0 0.5em 0;
-	}
-
-	figure {
-		margin: 0 0 1em 0;
-	}
-
-	img {
-		width: 100%;
-		max-width: 400px;
-		margin: 0 0 1em 0;
-	}
-
-	p {
-		margin: 1em auto;
-	}
-
-	@media (min-width: 480px) {
-		h1 {
-			font-size: 4em;
+<script context="module">
+	export function preload(page, session) {
+		return {
+			href: `https://discordapp.com/api/oauth2/authorize?client_id=570931295253823488&redirect_uri=${"http://localhost:3000/authenticate"}&response_type=code&scope=email identify guilds connections`
 		}
 	}
-</style>
+</script>
 
 <script>
-import { onMount } from "svelte";
-import apollo from "../apollo.js";
-import { gql } from 'apollo-boost';
-
-const SAY_HELLO = gql`
-	{
-		sayHello
-	}
-`;
-let str = "Loading...";
-
-onMount(() => {
-	const observable = apollo.watchQuery({
-		query: SAY_HELLO
-	})
-
-
-	const sub = observable.subscribe({
-		next: ({ data }) => {
-			str = data.sayHello;
-		}
-	});
-
-	return () => sub.unsubscribe();
-});
-
-
-
+	import LoginButton from '../components/LoginButton';
+	export let href;
+	console.log(href);
 </script>
 
 <svelte:head>
 	<title>Sapper project template</title>
 </svelte:head>
 
-<h1>{str}</h1>
-
-<figure>
-	<img alt='Borat' src='great-success.png'>
-	<figcaption>HIGH FIVE!</figcaption>
-</figure>
-
-<p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
+<LoginButton href={href}>Login</LoginButton>
