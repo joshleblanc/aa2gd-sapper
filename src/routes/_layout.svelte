@@ -1,3 +1,9 @@
+<script context="module">
+	export function preload() {
+		console.log("Layout");
+	}
+</script>
+
 <script>
 	import Nav from '../components/Nav.svelte';
 
@@ -7,9 +13,9 @@
 <style>
 	main {
 		position: relative;
-		max-width: 150em;
+		max-width: 100%;
 		background-color: white;
-		padding: 2em;
+		padding: 1em;
 		margin: 0 auto;
 		box-sizing: border-box;
 	}

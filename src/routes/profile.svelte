@@ -1,42 +1,63 @@
 <script context="module">
+	import { userStore } from './currentUserStore';
 	export async function preload(page, session) {
-		const resp = await this.fetch('/api/profile', {
-			credentials: 'include'
-		});
-
-		const json = await resp.json();
-		console.log("json:", json);
-		return {
-			user: json
-		}
+		await userStore.fetch.bind(this)();
 	}
 </script>
 
 <script>
 	import Container from '../components/Container';
+	import Row from '../components/Row';
+	import Col from '../components/Col';
 	import Avatar from '../components/Avatar';
 	import TimeTable from '../components/TimeTable';
+	import Connection from '../components/Connection';
+	import ServerItem from '../components/ServerItem';
 
 	export let src;
-	export let user;
+	let user;
+	userStore.subscribe(u => {
+		user = u;
+	})
 	console.log(user);
+
 </script>
-<div class="row">
-	<div class="col-xs-12 col-sm-12 col-md-6">
+
+<style>
+	.servers {
+		max-height: 760px;
+		overflow-y: auto;
+	}	
+	i {
+		image-rendering: pixelated;
+	}
+</style>
+
+<Row>
+	<Col xs={12} md={6}>
 		<Container title="Timetable">
 			<TimeTable timeTable={user.timeTable} />
 		</Container>
-	</div>
+	</Col>
 	<div class="col-xs-12 col-sm-12 col-md-6">
 		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-lg-6">
-				<Container title="Servers"></Container>
-
-			</div>
-			<div class="col-xs-12 col-sm-12 col-lg-6">
-				<Container title="Connections"></Container>
-
-			</div>
+			
+			<Col xs={12} lg={6}>
+				<Container title="Servers">
+					<div class="servers">
+						{#each user.servers as server}
+							<ServerItem {server} />
+						{/each}
+					</div>
+				</Container>
+			</Col>
+			<Col xs={12} lg={6}>
+				<Container title="Connections">
+					{#each user.connections as connection}
+						<Connection {connection} />
+					{/each}
+				</Container>
+			</Col>
 		</div>
 	</div>
-</div>
+</Row>

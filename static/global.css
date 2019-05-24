@@ -34,3 +34,7 @@ code {
 		font-size: 16px;
 	}
 }
+
+button.picker-cancel, button.picker-confirm {
+	display: inline-block !important;
+}

@@ -20,6 +20,7 @@
 	table {
 		width: 100%;
 		table-layout: fixed;
+		font-size: 8px;
 	}
 	.green {
 		background-color: green;

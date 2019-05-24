@@ -7,7 +7,7 @@ import { discordRequest } from '../lib/discordRequest';
 
 export async function get(req, res, next) {
 		const cookies = new Cookies(req, res);
-		console.log(req.hostname);
+		console.log(req.headers.host);
 		const data = new FormData();
         data.append('client_id', process.env.DISCORD_CLIENT_ID);
         data.append('client_secret', process.env.DISCORD_CLIENT_SECRET);

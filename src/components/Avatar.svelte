@@ -4,8 +4,8 @@
 
 <style>
 	div {
-		width: 48px;
-		height: 48px;
+		width: 24px;
+		height: 24px;
 		display: flex;
 		position: relative;
 		overflow: hidden;
@@ -15,6 +15,7 @@
 		user-select: none;
 		border-radius: 50%;
 		justify-content: center;
+		margin-right: 12px;
 	}
 
 	img {
@@ -22,7 +23,6 @@
 		height: 100%;
 		text-align: center;
 		object-fit: cover;
-		image-rendering: pixelated;
 	}
 </style>
 
